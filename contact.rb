@@ -2,9 +2,20 @@ require 'rubygems'
 require 'active_support/all'
 require 'ostruct'
 require './info'
+require './spec/support/test_data'
 
 class Contact
-  attr_reader :email_address, :id, :name, :company, :address, :phone, :avatar
+  attr_reader :email_address,
+              :id,
+              :name,
+              :company,
+              :address,
+              :phone,
+              :avatar,
+              :twitter,
+              :linkedin,
+              :foursquare,
+              :facebook
 
   def initialize params
     load_data params
@@ -21,6 +32,10 @@ class Contact
     return @response unless @response.nil?
     @response = get_data
     @response = @response.fetch("prospect"){ Hash.new }
+    @response["twitter"] = Info::Twitter.new(@response.fetch("twitter"){ Hash.new })
+    @response["linkedin"] = Info::LinkedIn.new(@response.fetch("linkedin"){ Hash.new })
+    @response["foursquare"] = Info::Foursquare.new(@response.fetch("foursquare"){ Hash.new })
+    @response["facebook"] = Info::Facebook.new(@response.fetch("facebook"){ Hash.new })
     load_data(@response)
     @response = wrap_response(@response)
   end
@@ -36,12 +51,17 @@ class Contact
     @address ||= data.fetch("address"){ nil }
     @phone ||= data.fetch("phone"){ nil }
     @avatar ||= data.fetch("avatar"){ nil }
+    @twitter ||= data.fetch("twitter"){ nil }
+    @linkedin ||= data.fetch("linkedin"){ nil }
+    @foursquare ||= data.fetch("foursquare"){ nil }
+    @facebook ||= data.fetch("facebook"){ nil }
     return self
   end
 
   def get_data
     return @get_data unless @get_data.nil?
-    data = "{}" # Get From The network
+    # This should pull from the network using https://github.com/lostisland/faraday
+    data = TestData.response_data
     @get_data = ActiveSupport::JSON.decode(data)
   end
 

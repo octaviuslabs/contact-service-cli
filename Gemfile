@@ -5,3 +5,7 @@ source "https://rubygems.org"
 gem "activesupport"
 gem "rspec"
 gem "pry"
+gem "faraday"
+gem "colorize"
+gem 'ruby-progressbar'
+gem "faraday-detailed_logger"

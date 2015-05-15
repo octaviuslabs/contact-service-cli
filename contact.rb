@@ -32,7 +32,7 @@ class Contact
   def self.find id=nil
     return false unless id
     contact = new(id: id)
-    contact.response
+    contact.get!
     return contact
   end
 

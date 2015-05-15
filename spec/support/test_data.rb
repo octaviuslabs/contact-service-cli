@@ -30,6 +30,28 @@ module TestData
     %[{"handle": "jsfour"}]
   end
 
+  def self.contact_response
+    %[
+      {
+      "contact": {
+          "type": "contact",
+          "id": "THISISAUUID",
+          "email_address": "dummy@email.com",
+          "name": "Dummy Person",
+          "company": "Dummy Company",
+          "address": "Pleasant Grove, UT, USA",
+          "phone": "THEPHONE",
+          "contact_type": "prospect",
+          "avatar": "THEAVITAR",
+          "facebook": #{facebook_json},
+          "twitter": #{twitter_json},
+          "linkedin": #{linkedin_json},
+          "foursquare": #{foursquare_json}
+        }
+      }
+    ]
+  end
+
   def self.response_data
     %[
       {

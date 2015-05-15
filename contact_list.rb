@@ -25,7 +25,7 @@ class ContactList < Array
   def find_all!
     puts "Finding All Contacts By ID".colorize(:green)
     sleep_time = 0
-    slice = self[3490..-1]
+    slice = self
     bar = Progressive.new(slice.count)
     csv = CsvOutput.new('output.csv')
     slice.each do |contact|

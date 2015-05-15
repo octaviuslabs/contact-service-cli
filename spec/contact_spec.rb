@@ -21,7 +21,7 @@ end
 describe Contact do
   describe "#find" do
     subject do
-      allow_any_instance_of(Contact).to receive(:get_data).and_return(TestData.to_h(TestData.response_data))
+      allow_any_instance_of(Contact).to receive(:get_data).and_return(TestData.to_h(TestData.contact_response))
       Contact.find('THISISANID')
     end
     it_behaves_like "a contact"
